@@ -30,16 +30,12 @@ export function DashboardHeader() {
           </div>
 
           <div className="flex items-center space-x-2">
-            <Link href="/dashboard">
-              <Button variant="ghost" className="text-slate-700 hover:text-blue-600 hover:bg-blue-50">
-                Home
-              </Button>
-            </Link>
-            <Link href="/dashboard/projects">
-              <Button variant="ghost" className="text-slate-700 hover:text-blue-600 hover:bg-blue-50">
-                Recent Projects
-              </Button>
-            </Link>
+            <Button variant="ghost" className="text-slate-700 hover:text-blue-600 hover:bg-blue-50" asChild>
+              <Link href="/dashboard">Home</Link>
+            </Button>
+            <Button variant="ghost" className="text-slate-700 hover:text-blue-600 hover:bg-blue-50" asChild>
+              <Link href="/dashboard/projects">Recent Projects</Link>
+            </Button>
           </div>
 
           <div className="flex items-center space-x-4">
