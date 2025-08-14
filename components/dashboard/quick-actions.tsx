@@ -57,11 +57,9 @@ export function QuickActions() {
               </div>
             </CardHeader>
             <CardContent className="pt-0">
-              <Link href={action.href}>
-                <Button variant="outline" size="sm" className="w-full bg-transparent">
-                  {action.action}
-                </Button>
-              </Link>
+              <Button asChild variant="outline" size="sm" className="w-full bg-transparent">
+                <Link href={action.href}>{action.action}</Link>
+              </Button>
             </CardContent>
           </Card>
         ))}
@@ -73,8 +71,12 @@ export function QuickActions() {
           <CardDescription>Get started with our comprehensive guides and documentation</CardDescription>
         </CardHeader>
         <CardContent>
-          <Button variant="outline" className="w-full border-blue-300 text-blue-700 hover:bg-blue-50 bg-transparent">
-            View Documentation
+          <Button
+            asChild
+            variant="outline"
+            className="w-full border-blue-300 text-blue-700 hover:bg-blue-50 bg-transparent"
+          >
+            <Link href="/docs">View Documentation</Link>
           </Button>
         </CardContent>
       </Card>
