@@ -358,7 +358,7 @@ export function ComplianceDetails() {
   }
 
   return (
-    <>
+    <div>
       <Card>
         <CardHeader>
           <CardTitle className="font-serif font-semibold text-xl">Detailed Compliance Review</CardTitle>
@@ -744,6 +744,6 @@ export function ComplianceDetails() {
           </div>
         </DialogContent>
       </Dialog>
-    </>
+    </div>
   )
 }
