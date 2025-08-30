@@ -233,11 +233,9 @@ export function FileUploadArea() {
                       </svg>
                       <span className="text-sm font-medium">Ready for AI Review</span>
                     </div>
-                    <Link href={`/chat?file=${encodeURIComponent(file.name)}`}>
-                      <Button size="sm" className="bg-green-600 hover:bg-green-700">
-                        Start Review
-                      </Button>
-                    </Link>
+                    <Button size="sm" className="bg-green-600 hover:bg-green-700" asChild>
+                      <Link href={`/chat?file=${encodeURIComponent(file.name)}`}>Start Review</Link>
+                    </Button>
                   </div>
                 )}
               </div>

@@ -190,24 +190,18 @@ export function FileManager() {
                   </div>
 
                   <div className="flex items-center space-x-2 pt-1">
-                    <Link href="/compliance">
-                      <Button variant="outline" size="sm" className="h-7 text-xs bg-transparent">
-                        View Details
-                      </Button>
-                    </Link>
+                    <Button variant="outline" size="sm" className="h-7 text-xs bg-transparent" asChild>
+                      <Link href="/compliance">View Details</Link>
+                    </Button>
                     {file.status === "ready" && (
-                      <Link href={`/chat?file=${encodeURIComponent(file.name)}`}>
-                        <Button size="sm" className="h-7 text-xs bg-blue-600 hover:bg-blue-700">
-                          Start Review
-                        </Button>
-                      </Link>
+                      <Button size="sm" className="h-7 text-xs bg-blue-600 hover:bg-blue-700" asChild>
+                        <Link href={`/chat?file=${encodeURIComponent(file.name)}`}>Start Review</Link>
+                      </Button>
                     )}
                     {file.status === "completed" && (
-                      <Link href="/export">
-                        <Button variant="outline" size="sm" className="h-7 text-xs bg-transparent">
-                          Export Report
-                        </Button>
-                      </Link>
+                      <Button variant="outline" size="sm" className="h-7 text-xs bg-transparent" asChild>
+                        <Link href="/export">Export Report</Link>
+                      </Button>
                     )}
                   </div>
                 </div>

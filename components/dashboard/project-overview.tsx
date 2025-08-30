@@ -97,17 +97,13 @@ export function ProjectOverview() {
                     <span className="text-slate-500">{project.lastActivity}</span>
                   </div>
                   <div className="flex space-x-2">
-                    <Link href="/compliance">
-                      <Button variant="outline" size="sm">
-                        View Details
-                      </Button>
-                    </Link>
+                    <Button variant="outline" size="sm" asChild>
+                      <Link href="/compliance">View Details</Link>
+                    </Button>
                     {project.status === "Completed" && (
-                      <Link href="/export">
-                        <Button size="sm" className="bg-green-600 hover:bg-green-700">
-                          Export Report
-                        </Button>
-                      </Link>
+                      <Button size="sm" className="bg-green-600 hover:bg-green-700" asChild>
+                        <Link href="/export">Export Report</Link>
+                      </Button>
                     )}
                   </div>
                 </div>
