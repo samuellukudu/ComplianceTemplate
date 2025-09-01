@@ -1,48 +1,82 @@
+"use client"
+
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
+import { useEffect, useState } from "react"
+import { getProjects, type Project } from "@/lib/project-storage"
 
 export function ProjectOverview() {
-  const projects = [
-    {
-      id: 1,
-      name: "Downtown Office Complex",
-      type: "HVAC Review",
-      status: "In Progress",
-      progress: 65,
-      lastActivity: "2 hours ago",
-      compliance: 8,
-      totalChecks: 12,
-    },
-    {
-      id: 2,
-      name: "Residential Tower - Phase 2",
-      type: "Electrical Review",
-      status: "Pending Review",
-      progress: 30,
-      lastActivity: "1 day ago",
-      compliance: 15,
-      totalChecks: 18,
-    },
-    {
-      id: 3,
-      name: "Manufacturing Facility",
-      type: "Mechanical Review",
-      status: "Completed",
-      progress: 100,
-      lastActivity: "3 days ago",
-      compliance: 22,
-      totalChecks: 22,
-    },
-  ]
+  const [projects, setProjects] = useState<Project[]>([])
+
+  useEffect(() => {
+    const savedProjects = getProjects()
+
+    // If no saved projects, show mock data for demo purposes
+    if (savedProjects.length === 0) {
+      const mockProjects: Project[] = [
+        {
+          id: "mock-1",
+          name: "Downtown Office Complex",
+          type: "HVAC Review",
+          status: "In Progress",
+          progress: 65,
+          lastActivity: "2 hours ago",
+          compliance: 8,
+          totalChecks: 12,
+          createdAt: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000),
+          files: ["HVAC_Floor_Plan_L1.dxf"],
+          discipline: "HVAC",
+        },
+        {
+          id: "mock-2",
+          name: "Residential Tower - Phase 2",
+          type: "Electrical Review",
+          status: "Pending Review",
+          progress: 30,
+          lastActivity: "1 day ago",
+          compliance: 15,
+          totalChecks: 18,
+          createdAt: new Date(Date.now() - 1 * 24 * 60 * 60 * 1000),
+          files: ["Electrical_Schematic.dxf"],
+          discipline: "Electrical",
+        },
+        {
+          id: "mock-3",
+          name: "Manufacturing Facility",
+          type: "Mechanical Review",
+          status: "Completed",
+          progress: 100,
+          lastActivity: "3 days ago",
+          compliance: 22,
+          totalChecks: 22,
+          createdAt: new Date(Date.now() - 3 * 24 * 60 * 60 * 1000),
+          files: ["Mechanical_Layout.dxf"],
+          discipline: "Mechanical",
+        },
+      ]
+      setProjects(mockProjects)
+    } else {
+      setProjects(savedProjects)
+    }
+  }, [])
+
+  useEffect(() => {
+    const handleStorageChange = () => {
+      setProjects(getProjects())
+    }
+
+    window.addEventListener("storage", handleStorageChange)
+    return () => window.removeEventListener("storage", handleStorageChange)
+  }, [])
 
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <h2 className="font-serif font-semibold text-2xl text-slate-900">Recent Projects</h2>
         <Button className="bg-blue-600 hover:bg-blue-700" asChild>
-          <Link href="/project/new">New Project</Link> {/* Updated to link to new chat-based project creation */}
+          <Link href="/project/new">New Project</Link>
         </Button>
       </div>
 
@@ -100,11 +134,11 @@ export function ProjectOverview() {
                     <Button variant="outline" size="sm" asChild>
                       <Link href="/compliance">View Details</Link>
                     </Button>
-                    {project.status === "Completed" && (
+                    {project.status === "Completed" ? (
                       <Button size="sm" className="bg-green-600 hover:bg-green-700" asChild>
                         <Link href="/export">Export Report</Link>
                       </Button>
-                    )}
+                    ) : null}
                   </div>
                 </div>
               </div>
